@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>URL Prediction</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<style>
+    body {
+        background-color: #f8f9fa; /* Light grey background */
+    }
+    label, h1, h2, p {
+        color: black; /* Text color set to black */
+        font-display: inherit;
+        font-style: italic;
+        font-weight: bold;
+    }
+    label {
+        font-size: 20px;
+    }
+    h1 {
+        font-size: 50px;
+        text-align: center;
+    }
+    h2 {
+        font-size: 30px;
+        text-align: center;
+    }
+    p {
+        font-size: 20px;
+    }
+    #bar a {
+        color: blue;
+    }
+    #nr {
+        margin: 0px 300px 300px 300px;
+    }
+    #nr label {
+        color: black;
+    }
+</style>
+</head>
+<body>
+<nav class="navbar bg-light navbar-expand-lg navbar-red px-10 px-lg-5 py-3 py-lg-0">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup" style="font-size: 30px; margin-right: 50px;">
+            <div class="navbar-nav ms-auto" id="bar">
+                <a class="nav-link active" aria-current="page" href="/">Home</a>
+                <a class="nav-link" href="/predict">Prediction</a>
+                <a class="nav-link" href="/result">Result</a>
+                <a class="nav-link" href="/performance">Performance</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<form action='/predict' method="post">
+    <div style="margin-top: 50px;">
+        <center>
+            <h1>URL Attacks</h1>
+        </center>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div id="nr">
+        <h2>URL Features</h2>
+        {% if error_message %}
+        <p class="error">{{ error_message }}</p>
+        {% endif %}
+        <br>
+        <div align="center" style="margin:0px 150px 0px 400px;">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="url_len">Url length</label>
+                        <input type="number" name="url_len" class="form-control">
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="letters_count">Letters count</label>
+                        <input type="number" name="letters_count" class="form-control">
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="digits_count">Digits count</label>
+                        <input type="number" name="digits_count" class="form-control">
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="special_chars_count">Special chars count</label>
+                        <input type="number" name="special_chars_count" class="form-control">
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="shortened">Shortened</label>
+                        <input type="number" name="shortened" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="abnormal_url">Abnormal url</label>
+                        <input type="number" name="abnormal_url" class="form-control">
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="secure_http">Secure http</label>
+                        <input type="number" name="secure_http" class="form-control">
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="ip_address">IP address</label>
+                        <input type="number" name="ip_address" class="form-control">
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="url_region">URL region</label>
+                        <input type="number" name="url_region" class="form-control">
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="root_domain">Root domain</label>
+                        <input type="number" name="root_domain" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <br>
+        </div>
+        <div class="d-grid gap-2 col-2 mx-auto">
+            <input type="submit" class="btn btn-primary">
+        </div>
+    </div>
+</form>
+
+<div style="position: fixed; bottom: 100px; left: 80px;">
+    <button onclick="goBack()" class="btn btn-primary btn-lg"><i class="bi bi-arrow-left-circle-fill fs-30"></i></button>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</div>
+</body>
+</html>
